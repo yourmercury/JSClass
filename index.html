@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- <script src="script.js"></script> -->
+    <title>Document</title>
+
+    <style>
+        .container {
+    width: 25%;
+    padding: 10px;
+    margin: auto;
+    margin-top: 30px;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.number_buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.display {
+    height: 200px;
+}
+.button {
+    padding: 10px;
+    border: none;
+}
+.button:hover{background-color: #575169;}
+
+.input_values {
+    font-size: 20px;
+}
+
+.top {
+    background-color: #4B4462;
+    color: white;
+}
+.side {
+    background-color: #A990FF;
+    color: white;
+}
+
+.body {
+    background-color: #39334E;
+    color: white;
+}
+    </style>
+</head>
+
+<body>
+    <!-- CALCULATOR USING VANILLA JAVASCRIPT -->
+    <div class="container">
+
+        <div class="display">
+            <div class="input_values" id="input_values"></div>
+            <div class="answer" id="answer"></div>
+        </div>
+ 
+
+
+        <div class="number_buttons">
+            <button value="" class="func_btn button top" id="clear">C</button>
+            <button value="" class="func_btn button top" id="erase">&#11013</button>
+            <button value="/" class="func_btn button top">/</button>
+            <button value="%" class="func_btn button side">%</button>
+            <button value="7" class="num_btn button body">7</button>
+            <button value="8" class="num_btn button body">8</button>
+            <button value="9" class="num_btn button body">9</button>
+            <button value="*" class="func_btn button side">x</button>
+            <button value="4" class="num_btn button body">4</button>
+            <button value="5" class="num_btn button body">5</button>
+            <button value="6" class="num_btn button body">6</button>
+            <button value="-" class="func_btn button side">-</button>
+            <button value="1" class="num_btn button body">1</button>
+            <button value="2" class="num_btn button body">2</button>
+            <button value="3" class="num_btn button body">3</button>
+            <button value="+" class="func_btn button side">+</button>
+            <button value="00" class="num_btn button body">00</button>
+            <button value="0" class="num_btn button body">0</button>
+            <button value="." class="func_btn button body">.</button>
+            <button value="=" class="button side" id="evaluate">=</button>
+        </div>
+    </div>
+
+
+
+    <script src="index.js"></script>
+</body>
+
+</html>

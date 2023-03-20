@@ -1,0 +1,137 @@
+let output = [0];
+let result = 0;
+
+const numbers = document.querySelectorAll(".num_btn");
+const funcs = document.querySelectorAll(".func_btn");
+
+numbers.forEach(function(element, index){
+    element.onclick = function(){
+        let num = element.innerHTML;
+        let last = output[output.length - 1]
+
+        if(typeof last == "number"){
+            output[output.length - 1] = Number(String(last) + num);
+            calcDisplay();
+        }else {
+            output.push(Number(num));
+            calcDisplay();
+        }
+    }
+})
+
+funcs.forEach(function(element, index){
+    element.onclick = function(){
+        let func = element.innerHTML;
+        let last = output[output.length - 1]
+        console.log(func);
+
+        if(func == "="){
+            evaluate();
+            output = [0];
+        }
+
+        else if(func == "C"){
+            output = [0];
+            result = 0;
+            calcDisplay();
+            displayResult();
+        }
+
+        else if(func == "⬅"){
+            if(typeof last == "number"){
+                let num = String(last);
+                if(num.length == 1) {
+                    output.pop();
+                }
+
+                else {
+                    let arr = num.split("")
+                    arr.splice(arr.length-1, 1);
+                    console.log(arr);
+                    num = arr.join("");
+                    output[output.length-1] = Number(num);
+                }
+            }else {
+                output.pop();
+            }
+
+            calcDisplay();
+        }
+
+        else if(typeof last == "number"){
+            output.push(symbol(func));
+            calcDisplay();
+        }
+    }
+})
+
+
+function $(selector){
+    return document.querySelector(selector);
+}
+
+function calcDisplay(){
+    const disp = $("#input_values");
+    disp.innerHTML = output.join(" ");
+}
+
+function displayResult(){
+    const disp = $("#answer");
+    disp.innerHTML = result;
+}
+
+function symbol(sym){
+    return `<span style="font-family: sans-serif;">${sym}</span>`
+}
+
+
+
+
+//evaluating with bodmas
+
+function evaluate(){
+    let sym = null;
+    
+    let arr = [...output];
+
+    for(let i=0; i<arr.length; i++){
+        let element = arr[i];
+        if(element == symbol("x") || element == symbol("/")){
+            if(element == symbol("x")){
+                let res = arr[i-1] * arr[i+1];
+                arr[i-1] = res;
+                arr.splice(i, 2);
+                i = i-1;
+            }
+
+            if(element == symbol("/")){
+                let res = arr[i-1] / arr[i+1];
+                arr[i-1] = res;
+                arr.splice(i, 2);
+                i = i-1;
+            }
+        }
+    }
+
+    for(let i=0; i<arr.length; i++){
+        let element = arr[i];
+
+        if(typeof element == "number"){
+            if(!sym) result = element;
+            else {
+                if(sym == symbol("+"))
+                    result += element;
+                else
+                    result -= element;
+            }
+        }else {
+            sym = element;
+        }
+    }
+
+
+    displayResult();
+}
+
+calcDisplay();
+evaluate()
