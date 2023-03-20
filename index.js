@@ -2,7 +2,14 @@ class MySet {
   store = [];
   size = 0;
 
-  constructor() {}
+  constructor() {
+    for(let member of arguments){
+        if(!this.store.includes(member)){
+            this.store.push(member);
+            this.size++;
+        }
+    }
+  }
 
   add(value) {
     let hasValue = this.store.includes(value);
@@ -47,3 +54,7 @@ class MySet {
     return [...this.store];
   }
 }
+
+let set = new MySet(10, 30, 50, 100, 200, 30);
+
+console.log(set.getSet())
